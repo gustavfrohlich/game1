@@ -1,4 +1,4 @@
-var scores, roundscores, activePlayer, gamePlaying;
+var scores, roundscores, activePlayer, gamePlaying, lastDice;
 
 init();
 
@@ -12,12 +12,18 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
     diceDOM.style.display = 'block';
     diceDOM.src = 'dice-' + dice + '.png';   
     
-    if (dice !== 1){
+    if(lastDice === 6 && dice === 6){
+        scores[activePlayer] = 0;
+        document.querySelector('#score-' + activePlayer).textContent = '0';
+        nextPlayer();
+
+    } else if (dice !== 1){
         roundscores += dice;
         document.querySelector('#current-' + activePlayer).textContent = roundscores;
     } else {
         nextPlayer();
     }
+    lastDice = dice;
 }});
 
 document.querySelector('.btn-hold').addEventListener('click', function(){
