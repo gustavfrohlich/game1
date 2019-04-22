@@ -32,7 +32,15 @@ document.querySelector('.btn-hold').addEventListener('click', function(){
 
     document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
 
-    if (scores[activePlayer] >= 100){
+    var input = document.querySelector('.final-score').value;
+    var winningScore;
+    if(input){
+        winningScore = input;
+    }else{
+        winningScore = 100;
+    }
+
+    if (scores[activePlayer] >= winningScore){
         gamePlaying = false;
         document.getElementById('name-' + activePlayer).textContent = 'Winner!';
         document.querySelector('.dice').style.display = 'none';
